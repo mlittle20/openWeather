@@ -1,0 +1,40 @@
+{% extends "master.html"%}
+
+{% block title%}
+Weather Home
+{% endblock %}
+
+{% block content %}
+
+<h1>City Look-Up</h1>
+ <form action="" method="post">{% csrf_token %}
+    <div class="form-group">
+      <label for="city">City:</label>
+      <input type="text" class="form-control" id="city" name="city" value="{{ request.POST.city }}">
+    </div>
+    <div class="form-group">
+      <label for="zip">Zip Code:</label>
+      <input type="text" class="form-control" id="zip" name="zip" value="{{ request.POST.zip }}">
+    </div>
+    <div class="form-group">
+      <label for="country">Country:</label>
+      <input type="text" class="form-control" id="country" name="country" value="{{ request.POST.country }}">
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+
+<table class="table">
+    <tr><th>Current Conditions</th><th>City</th><th>State</th><th>Country</th><th>Lat</th><th>Lon</th></tr>
+    {%if not data.name%}
+        {%for x in data%}
+            <tr><td><a href="{% url 'current' x.lon x.lat%}"> Get Conditions</a></td><td>{{x.name}}</td><td>{{x.state}}</td><td>{{x.country}}</td><td>{{x.lat}}</td><td>{{x.lon}}</td></tr>
+        {%endfor%}
+    {%else%}
+        <tr><td>{{data.name}}</td><td>{{data.state}}</td><td>{{data.country}}</td><td>{{data.lon}}</td><td>{{data.lat}}</td></tr>
+    {%endif%}
+</table>
+{% endblock %}
+
+{% block footer%}
+
+{% endblock %}

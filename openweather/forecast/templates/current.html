@@ -1,0 +1,16 @@
+{% extends "master.html"%}
+
+{% block title%}
+Current Weather
+{% endblock %}
+
+{% block content %}
+    <h1>Current Conditions</h1>
+    <h2>Lat:{{lat}}  Lon:{{lon}}</h2>
+    <p>{{data}}</p>
+    {% for x in data %}
+        {{x}}
+    {% endfor %}
+<br><br>
+<h2>{{weather}}</h2>
+{% endblock %}
